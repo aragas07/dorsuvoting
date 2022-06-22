@@ -211,7 +211,7 @@ $(function(){
     })
     
     $.ajax({
-        url: '../db/DBManipulation.php',
+        url: 'db/DBManipulation.php',
         type: 'post',
         data: {isApply: true},
         success: function(result){
@@ -230,7 +230,7 @@ $(function(){
 
     loadAll(0);
     $.ajax({
-        url: '../db/DBManipulation.php',
+        url: 'db/DBManipulation.php',
         type: 'post',
         data: {isVote: true},
         success: function(result){
