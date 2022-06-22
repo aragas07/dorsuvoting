@@ -393,16 +393,18 @@
             echo false;
         }
     }else if(isset($_POST['isVote'])){
-        $isVote = $conn->query("SELECT * FROM open_elect where vote_start < now() and vote_end > now()");
-        if($isVote->num_rows != 0){
-            echo "true";
-        }else{ echo "false";}
+        echo "Example";
+        // $isVote = $conn->query("SELECT * FROM open_elect where vote_start < now() and vote_end > now()");
+        // if($isVote->num_rows != 0){
+        //     echo true;
+        // }else{ echo false;}
     }else if(isset($_POST['isApply'])){
-        $isApply = $conn->query("SELECT * FROM open_elect where application_open < now() and application_close > now()");
-        if($isApply->num_rows != 0){
-            echo "true";
-        }else{
-            echo "false";
-        }
+        echo "This is my sample";
+        // $isApply = $conn->query("SELECT * FROM open_elect where application_open < now() and application_close > now()");
+        // if($isApply->num_rows != 0){
+        //     echo true;
+        // }else{
+        //     echo false;
+        // }
     }
 ?>
