@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>DOrSU Voting</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="dist/img/credit/dorsu.ico">
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
+    <link rel="stylesheet" href="dist/css/style.css">
+</head>
+<body>
+        <div class="container">
+            <div class="container-fluid" id="information">
+                <div class="row element-center">
+                    <div class="col-md-12">
+                        <div class="card card-primary">
+                            <div class="card-header p-2">
+                                <div class="card-title row">
+                                    <img src="dist/img/credit/dorsu.png" style="height:40px; margin-right: 10px">
+                                    <h2>Welcome to DOrSU Voting <a style="font-size: 23px !important;" id="card-title"></a> </h2>
+                                </div>
+                                <div class="card-tools">
+                                    <nav class="navbar navbar-minimal animate" role="navigation">
+                                        <div class="navbar-toggler animate">
+                                            <span class="menu-icon"></span>
+                                        </div>
+                                        <ul class="navbar-menu animate">
+                                            <li>
+                                                <a href="faq.html" class="animate">
+                                                    <span class="desc animate"> faq </span>
+                                                    <span><button style="border:none;background-color: #00000000;color: white"><i class="fas fa-question"></i></button></span>
+                                                </a>
+                                            </li>
+                                            <li id="li-logout">
+                                                <a href="#" id="logout" class="animate">
+                                                    <span class="desc animate"> Log out </span>
+                                                    <span><button style="border:none;background-color: #00000000;color: white"><i class="fas fa-sign-out-alt"></i></button></span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-3 fixed" id="position"></div>
+                                    <div class="col-md-9 candidacy" id="candidacy"></div>
+                                </div>
+                            </div>
+                            <div class="card-footer" id="civil">
+                                <p>Davao Oriental State Univercity &copy 2022.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="adding">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Apply</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" id="applying" >
+                                <form class="needs-validation" method="post" novalidate id="apply">
+                                    <input type="text" hidden name="studid" id="studid">
+                                    <div class="form-group row">
+                                        <label class="col-md-12">Position</label>
+                                        <div class="col-sm-12">
+                                            <select name="position" id="posselect" class="custom-select"></select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-md-12">Upload report of grade scanned</label>
+                                        <input type="file" required name="filegrade" class="form-control-file" accept="image/*">
+                                    </div>
+                                    <input class="btn btn-primary col-12" name="apply" type="submit" value="Submit">
+                                </form>
+                            </div>
+                            <div class="modal-body" hidden id="applyed">
+                                <h3 id="title"></h3>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                
+                <div class="modal fade" id="viewgrade">
+                    <div class="modal-dialog">
+                        <div class="modal-content" style="padding: 0;">
+                            <img id="grade-img">
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+            </div>
+        </div>
+        <script src="plugins/jquery/jquery.min.js"></script>
+        <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="plugins/toastr/toastr.min.js"></script>
+        <script src="dist/js/swal.min.js"></script>
+    <script>
+        $(function(){
+            var forms = document.querySelectorAll('.needs-validation');
+            Array.prototype.slice.call(forms)
+                .forEach(function(form) {form.addEventListener('submit', function(event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+            
+            $('.navbar-toggler').on('click', function(event) {
+                event.preventDefault();
+                $(this).closest('.navbar-minimal').toggleClass('open');
+            })
+            $.ajax({
+                url: 'db/DBManipulation.php',
+                type: 'post',
+                data: {auth: true},
+                success: function(result){
+                    $chunk = result.split("||");
+                    $('#studid').val($chunk[1]);
+                    $("#card-title").html($chunk[5]+", "+$chunk[3]);
+                    if($chunk[0] == 'false') window.location = 'login.html';
+                    else if($chunk[0] == 'student'){
+                        $("#li-logout").before('<li><a href="#" data-toggle="modal" id="modal" data-target="#adding" class="animate"><span class="desc animate"> Apply for position </span><span><button style="border:none;background-color: #00000000;color: white"><i class="fas fa-user-tie"></i></button></span></a></li>');
+                        $("#modal").click(function(){
+                            isApplyed();
+                        })
+                    } 
+                    else if($chunk[0] == 'candidate') $("#li-logout").before('<li><a href="index.html" class="animate"><span class="desc animate"> View profile </span><span><button style="border:none;background-color: #00000000;color: white" ><i class="fas fa-id-card"></i></button></span></a></li>');
+                    if($chunk[10] == '0'){
+                        $.ajax({
+                            url: 'db/DBManipulation.php',
+                            type: 'post',
+                            data: {getType: true},
+                            success: function(result){
+                                if(result == 'tally'){$("#title-panel").text("Tally Panel");}
+                                else{$("#title-panel").text("Comelec Panel");}
+                            }
+                        })
+                    }
+                    $.ajax({
+                        url: 'db/DBManipulation.php',
+                        type: 'post',
+                        data: {loadposition: true},
+                        success: function(result){
+                            var b = true, id = 0;
+                            $("#position").html(result);
+                            $(".position").click(function(){
+                                loadpos($(this).attr('id'),b);
+                                $(this).removeClass('btn-modif-w-r');
+                            })
+                            if(b){
+                                loadpos(id,b);
+                                b=false;
+                            }
+                        }
+                    })
+                }
+            })
+
+            $("#logout").click(function(){
+                $.ajax({
+                    url: 'db/DBManipulation.php',
+                    type: 'post',
+                    data: {logout: true},
+                    success: function(result){
+                        if(result == 'false') window.location = 'login.html';
+                    }
+                })
+            })
+
+            function loadpos(id, b){
+                $(".position").each(function(){
+                    $(this).attr('class','btn btn-modif-w-r position col-md-12');
+                    if(b){
+                        $(this).removeClass('btn-modif-w-r');
+                        b=false;
+                        id=$(this).attr('id');
+                    }
+                })
+                loadcan(id,b);
+            }
+
+            function loadcan(id,b){
+                $.ajax({
+                    url: 'db/DBManipulation.php',
+                    type: 'post',
+                    data: {candidate: id, studid: $('#studid').val(), type: 'student'},
+                    success: function(result){
+                        console.log(result);
+                        $chunk = result.split('||');
+                        var title = '';
+                        $("#candidacy").html($chunk[1]);
+                        if($chunk[0] == '1'){
+                            title = 'Are you certain you want to vote for this candidate?';
+                        }else{
+                            title = 'Are you sure you want to nominate this person as a candidate?';
+                        }
+                        $(".btn-grade").click(function(){
+                            $("#grade-img").attr('src','gradefile/'+$(this).attr('id'));
+                        })
+
+                        $(".btn-success").click(function(){
+                            var btn = $(this);
+                            Swal.fire({
+                            title: title,
+                            showCancelButton: true,
+                            confirmButtonText: 'Yes',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    $.ajax({
+                                        url: 'db/DBManipulation.php',
+                                        type: 'post',
+                                        data: {nominate: $(this).attr('id'), studid: $('#studid').val()},
+                                        success: function(result){
+                                            if(result == 'true') {
+                                                Swal.fire('You are now a candidate for this year election.', '', 'success');
+                                                btn.attr('class','btn btn-primary col-12').attr('disabled', true).text('APPROVED');
+                                            }else if(result == 'vote'){
+                                                loadcan(id,b);
+                                                btn.attr('class','btn btn-primary col-12').attr('disabled', true).text('VOTED');
+                                            }
+                                        }
+                                    })
+                                } else if (result.isDenied) {
+                                    Swal.fire('Changes are not saved', '', 'info')
+                                }
+                            })
+                        })
+                    }
+                })
+            }
+
+            
+            $("#apply").on('submit',function(event){
+                event.preventDefault();
+                Swal.fire({
+                title: 'Are you certain you want to campaign?',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: 'db/DBManipulation.php',
+                            method: 'POST',
+                            data: new FormData(this),
+                            contentType:false,
+                            cache: false,
+                            processData: false,
+                            success: function(result){
+                                if(result.trim() == 'success'){
+                                    swal.fire('Just wait for the admin to confirm that you are a candidate.','', 'success');
+                                    $("#chfile").val("");
+                                    $("#adding").modal("hide");
+                                }else{
+                                    swal.fire('Im sorry for not being able to submit your application','', 'error');
+                                }
+                            }
+                        })
+                    } else if (result.isDenied) {
+                        Swal.fire('Changes are not saved', '', 'info')
+                    }
+                })
+            })
+            function isApplyed(){
+                $.ajax({
+                    url: 'db/DBManipulation.php',
+                    type: 'post',
+                    data: {loadposforselect: $("#studid").val()},
+                    success: function(result){
+                        $chunk = result.split('||');
+                        if($chunk[0] == '0'){
+                            $("#applying").attr('hidden', true);
+                            $("#applyed").attr('hidden', false);
+                            $("#title").text("You're submitting an application for the position of "+$chunk[1]+".");
+                        }else{
+                            $("#applying").attr('hidden', false);
+                            $("#applyed").attr('hidden', true);
+                            $("#posselect").html($chunk[1]);
+                        }
+                    }
+                })
+            }
+
+            var b = true;
+            $("#update").click(function(){
+                if(b) b = false;
+                else b = true;
+                $(".edtxt").each(function(){
+                    $(this).attr('disabled', b);
+                })
+            })
+                
+        })
+    </script>
+</body>
+</html>

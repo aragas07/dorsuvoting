@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <title>AdminLTE 3 | Top Navigation</title>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <link rel="shortcut icon" type="image/x-icon" href="dist/img/credit/dorsu.ico">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="dist/css/alt/style.css">
+  <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body class="hold-transition layout-top-nav">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand-md navbar-dark navbar-primary">
+    <div class="container">
+      <a href="index3.html" class="navbar-brand">
+        <img src="dist/img/credit/dorsu.png" alt="DOrSU Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span style="font-family: Arial; font-weight: 500;" class="brand-text font-weight-light">Welcome to DOrSU Voting</span>
+      </a>
+      
+      <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Right navbar links -->
+      <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+        <li class="nav-item"><span class="nav-link"  id="card-title"></span></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link" data-toggle="dropdown" href="#"><i class="fa fa-bars"></i></a>
+          <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+            <a href="faq.html" class="dropdown-item active"> <i class="fas fa-question mr-2"></i>FAQ</a>
+            <div class="dropdown-divider"></div>
+            <a href="index.html" class="dropdown-item"> <i class="fas fa-id-card mr-2"></i>View profile</a>
+            <div class="dropdown-divider"></div>
+            <a href="applicant.html" id="vote-btn" class="dropdown-item"><i class="fa fa-vote-yea mr-2"></i>Vote</a>
+            <div class="dropdown-divider"></div>
+            <a href="#" id="logout" class="dropdown-item"><i class="fas fa-sign-out-alt mr-2"></i> Log out</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container">
+        <div class="row mb-2">
+            <div class="col-sm-12">
+                <h1 class="m-0 text-dark">Frequently Asked Question</h1>
+            </div>
+
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <div class="content">
+      <div class="container">
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <b>Q.1 I know about voting by ‘Postal ballot’. What is e-Voting?</b><br>
+                    
+                    <p><b>Ans.</b> &emsp; e-Voting is voting through an electronic system where shareholders can vote on resolutions
+                    of companies requiring voting through Postal Ballot as per extant rules and regulations
+                    without having the necessity of sending their votes through post. Ministry of Corporate
+                    Affairs has authorised NSDL for setting up an electronic platform to facilitate shareholders to
+                    cast vote in electronic form. Accordingly, NSDL has set-up an electronic infrastructure to
+                    facilitate shareholders to cast votes in electronic form through internet.</p>
+                    <b>Q.2 What is the legal framework permitting e-Voting?</b>
+                    <p><b>Ans.</b> &emsp; The Companies (Passing of the Resolution by Postal Ballot) Rules, 2001, has defined the
+                    “Postal Ballot as voting by shareholders by postal or electronic mode instead of voting
+                    personally by presenting for transacting businesses in a general meeting of the company”.
+                    Thus, Section 192A of the Companies Act, 1956 read with Companies (Passing of the
+                    Resolution by Postal Ballot) Rules, 2001 recognizes voting by electronic mode for postal
+                    ballot. The Postal Ballot Rules, 2001 were Superceded by Postal Ballot Rules, 2011, which
+                    prescribed the appropriate mechanism for e-Voting.</p>
+                    <b>Q.3 How will I benefit from the e-Voting system?</b>
+                    <p><b>Ans.</b> &emsp;(i) Ease of operation. With User ID and password, you can login to e-Voting system
+                    (https://www.evoting.nsdl.com) of NSDL through internet and cast your vote from your
+                    residence, office etc.
+                    (ii) Sufficient time to vote till the end of voting cycle.
+                    (iii) Elimination of postal ballots getting lost in-transit.
+                    (iv) Paperless mode of casting vote.</p>
+                    <b>Q.4 Does the e-Voting system of NSDL facilitate e-Voting for only demat account holders of NSDL?</b>
+                   
+                    <p><b>Ans.</b> &emsp; The e-Voting system of NSDL facilitates voting from all shareholders i.e., shareholders
+                    holding shares in physical and demat mode.</p>
+                    <b>Q.5 How do I register for e-Voting facility?</b>
+                    <p><b>Ans.</b> &emsp;There is no pre-registration related activity required at your end. The registration details viz.,
+                    User ID and password will be sent by the Issuer / R&T Agent /NSDL in the following mode :
+                    (I) In case email address of the Sole / First Holder is available with the Issuer/R&T Agent :
+                    (i) NSDL will generate User ID & password and send the same at the email address
+                    provided by issuer/R & T Agent.
+                    (ii) Using the User ID and password, you will login to the e-Voting system
+                    (https://www.evoting.nsdl.com) of NSDL.
+                    (II) Others (where email address of the Sole / First Holder is not available with the
+                    Issuer/R&T Agent)
+                    (i) NSDL will generate User ID and password and provide it to the Issuer/R&T Agent.
+                    (ii) The Issuer/R&T Agent will dispatch the User ID and password in a PIN mailer at the
+                    address of the Sole/First Holder.
+                    (iii) Using the User ID and password, you will login to e-Voting system
+                    (https://www.evoting.nsdl.com) of NSDL.</p>
+                    <b>Q.6 There are demat accounts / shares certificates held by joint holders. In such a case who
+                        will cast the vote in e-Voting system?</b>
+                    <p><b>Ans.</b> &emsp;As, only one of the several joint holders is entitled to exercise voting power, in case of evoting only first holder is recognized for the purpose of sending user ID & password for evoting. Accordingly, the vote casted using the User ID and password sent to first holder is
+                    recognized on behalf of all the joint holders, as the shareholder who casts the vote through 
+                    Frequently Asked Questions (FAQs) on the e-Voting system of NSDL (For Shareholders)
+                    the e-Voting services of NSDL is doing so on behalf of all joint holders.</p>
+                    <b>Q.7 Is there any charge for using e-Voting system of NSDL ?</b>
+                    <p><b>Ans.</b> &emsp;No. Currently, NSDL does not levy any charge on the shareholders for using the e-Voting
+                    system.</p>
+                    <b>Q.8 Is there any User manual to understand the login and voting process ?</b>
+                    <p><b>Ans.</b> &emsp; Yes. You can download the User manual from (https://www.evoting.nsdl.com).</p>
+                    <b>Q.9 Will proxy be able to cast vote in e-Voting system?</b>
+                    <p><b>Ans.</b> &emsp; e-Voting system brings flexibility, convenience and ease of operation for the shareholder to
+                    cast vote through internet. Thus, eliminating the need to appoint a proxy.</p>
+                    <b>Q.10 Is time period for e-Voting same as Postal Ballot?</b>
+                    <p><b>Ans.</b> &emsp; Yes. The time defined in the Postal Ballot Rules, 2001 for Postal Ballot is applicable for
+                    e-Voting as well.</p>
+                    <b>Q.11 Once I cast my vote on e-Voting System, can I modify my vote before the closing of
+                        e-Voting cycle?</b>
+                        <p><b>Ans.</b> &emsp; No. Vote once casted will be considered final and cannot be modified.</p>
+                    <b>Q.12 Voting on selective resolutions is permitted in Postal Ballot. Is the same available in the
+                        e-Voting system as well ?</b>
+                    <p><b>Ans.</b> &emsp; Yes. Since a shareholder can decide to vote only on some of the resolutions put to vote, the
+                    same can also be done in e-Voting system as well.</p>
+                    <b>Q.13 Can I reuse the password received for the first time by me for e-Voting?</b>
+                    <p><b>Ans.</b> &emsp; No. The e-Voting system will force the user to change the password during the first login.</p>
+                    <b>Q.14 How will the results be made available at the end of the voting period? </b>
+                    <p><b>Ans.</b> &emsp; The Scrutinizer will collate the votes downloaded from e-Voting system and votes received
+                    though other means to declare the final results for the resolutions placed for voting by the
+                    Issuer.</p>
+                    <b>Q.15 How will I know if e-Voting website is secured?</b>
+                    <p><b>Ans.</b> &emsp; If you are visiting the website with a secure connection, you will be able to identify the
+                    website through the site's certificate. A secure or encrypted website address will begin with
+                    HTTPS rather than HTTP, and you will see a lock icon in the Address bar. Secure
+                    connections use certificates to identify the website and to encrypt your connection so that it
+                    will be more difficult for a hacker to view. You can also click the lock icon in the Address
+                    bar to see more information about the secured website.</p>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+    <div class="p-3">
+      <h5>Title</h5>
+      <p>Sidebar content</p>
+    </div>
+  </aside>
+  <!-- /.control-sidebar -->
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <!-- To the right -->
+    <!-- Default to the left -->
+    <strong><a>Davao Oriental State Univercity &copy 2022</a>.</strong> All rights reserved.
+  </footer>
+</div>
+<!-- ./wrapper -->
+                <div class="modal fade" id="adding">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Apply</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" id="applying" >
+                                <form class="needs-validation" method="post" novalidate id="apply">
+                                    <input type="text" hidden name="studid" id="studid">
+                                    <div class="form-group row">
+                                        <label class="col-md-12">Position</label>
+                                        <div class="col-sm-12">
+                                            <select name="position" id="posselect" class="custom-select"></select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-md-12">Upload report of grade scanned</label>
+                                        <input type="file" required name="filegrade" class="form-control-file" accept="image/*">
+                                    </div>
+                                    <input class="btn btn-primary col-12" name="apply" type="submit" value="Submit">
+                                </form>
+                            </div>
+                            <div class="modal-body" hidden id="applyed">
+                                <h3 id="title"></h3>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                
+                <div class="modal fade" id="viewgrade">
+                    <div class="modal-dialog">
+                        <div class="modal-content" style="padding: 0;">
+                            <img id="grade-img">
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+
+<!-- REQUIRED SCRIPTS -->
+
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script>
+    $(function(){
+        $('.navbar-toggler').on('click', function(event) {
+            event.preventDefault();
+            $(this).closest('.navbar-minimal').toggleClass('open');
+        })
+    })
+    
+    $.ajax({
+            url: 'db/DBManipulation.php',
+            type: 'post',
+            data: {auth: true},
+            success: function(result){
+                $chunk = result.split("||");
+                $('#studid').val($chunk[1]);
+                $("#card-title").html($chunk[5]+", "+$chunk[3]);
+                if($chunk[0] == 'false') window.location = 'login.html';
+                else if($chunk[0] == 'student'){
+                    $("#li-logout").before('<li><a href="#" data-toggle="modal" id="modal" data-target="#adding" class="animate"><span class="desc animate"> Apply for position </span><span><button style="border:none;background-color: #00000000;color: white"><i class="fas fa-user-tie"></i></button></span></a></li>');
+                    $("#modal").click(function(){
+                        isApplyed();
+                    })
+                } 
+                else if($chunk[0] == 'candidate') $("#li-logout").before('<li><a href="index.html" class="animate"><span class="desc animate"> View profile </span><span><button style="border:none;background-color: #00000000;color: white" ><i class="fas fa-id-card"></i></button></span></a></li>');
+                if($chunk[10] == '0'){
+                    $.ajax({
+                        url: 'db/DBManipulation.php',
+                        type: 'post',
+                        data: {getType: true},
+                        success: function(result){
+                            if(result == 'tally'){$("#title-panel").text("Tally Panel");}
+                            else{$("#title-panel").text("Comelec Panel");}
+                        }
+                    })
+                }
+                $.ajax({
+                    url: 'db/DBManipulation.php',
+                    type: 'post',
+                    data: {loadposition: true},
+                    success: function(result){
+                        var b = true, id = 0;
+                        $("#position").html(result);
+                        $(".position").click(function(){
+                            loadpos($(this).attr('id'),b);
+                            $(this).removeClass('btn-modif-w-r');
+                        })
+                        if(b){
+                            loadpos(id,b);
+                            b=false;
+                        }
+                    }
+                })
+            }
+        })
+
+        
+        function isApplyed(){
+            $.ajax({
+                url: 'db/DBManipulation.php',
+                type: 'post',
+                data: {loadposforselect: $("#studid").val()},
+                success: function(result){
+                    $chunk = result.split('||');
+                    if($chunk[0] == '0'){
+                        $("#applying").attr('hidden', true);
+                        $("#applyed").attr('hidden', false);
+                        $("#title").text("You're submitting an application for the position of "+$chunk[1]+".");
+                    }else{
+                        $("#applying").attr('hidden', false);
+                        $("#applyed").attr('hidden', true);
+                        $("#posselect").html($chunk[1]);
+                    }
+                }
+            })
+        }
+        
+        $("#logout").click(function(){
+            $.ajax({
+                url: 'db/DBManipulation.php',
+                type: 'post',
+                data: {logout: true},
+                success: function(result){
+                    if(result == 'false') window.location = 'login.html';
+                }
+            })
+        })
+</script>
+</body>
+</html>

@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>DOrSU Voting</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="dist/img/credit/dorsu.ico">
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
+    <link rel="stylesheet" href="dist/css/style.css">
+    <style>
+        body{
+            background-image: url("dist/img/JOE01972.JPG");
+        }
+    </style>
+</head>
+<body>
+        <div class="container">
+            <div class="container-fluid" id="information">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-primary" id="student" hidden>
+                            <div class="card-header p-2">
+                                <div class="card-title row">
+                                    <img src="dist/img/credit/dorsu.png" style="height:40px; margin-right: 10px">
+                                    <h2>Welcome to DOrSU Voting</h2>
+                                </div>
+                                <div class="card-tools">
+                                    <nav class="navbar navbar-minimal animate" role="navigation">
+                                        <div class="navbar-toggler animate">
+                                            <span class="menu-icon"></span>
+                                        </div>
+                                        <ul class="navbar-menu animate">
+                                            <li>
+                                                <a href="faq.html" class="animate">
+                                                    <span class="desc animate"> faq </span>
+                                                    <span><button style="border:none;background-color: #00000000;color: white"><i class="fas fa-question"></i></button></span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" id="update" class="animate">
+                                                    <span class="desc animate"> Update profile </span>
+                                                    <span><button style="border:none;background-color: #00000000;color: white" ><i class="fas fa-pen-alt"></i></button></span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" id="vote-btn" class="animate">
+                                                    <span class="desc animate"> Vote </span>
+                                                    <span><button style="border:none;background-color: #00000000;color: white"><i class="fas fa-vote-yea"></i></button></span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" id="logout" class="animate">
+                                                    <span class="desc animate"> Log out </span>
+                                                    <span><button style="border:none;background-color: #00000000;color: white"><i class="fas fa-sign-out-alt"></i></button></span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <form class="needs-validation" id="forms" method="POST" action="db/DBManipulation.php" novalidate enctype="multipart/form-data">
+                                            <div class="row">
+                                                <div class="col-sm-3" style="min-width: 250px; text-align: center">
+                                                    <div class="form-group">
+                                                        <img id="pro-image" src="dist/img/profile.png" class="col-md-12">
+                                                    </div>
+                                                    <div class="form-group col">
+                                                        <button id="custom-btn" hidden class="btn btn-primary col-md-12" type="button">CHOOSE IMAGE</button>
+                                                    </div>
+                                                    <input type="file" name="file" accept="image/x-png,image/gif,image/jpeg" hidden id="default-btn">
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-2 col-form-label">ID</label>
+                                                        <div class="col-sm-10">
+                                                            <input required class="form-control form-control-sm" type="text" disabled name="studid" id="studid">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-2 col-form-label">First name</label>
+                                                        <div class="col-sm-10">
+                                                            <input required class="form-control form-control-sm required edtxt" disabled type="text" name="fname" id="fname">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-2 col-form-label">Middle name</label>
+                                                        <div class="col-sm-10">
+                                                            <input required class="form-control form-control-sm required edtxt" disabled type="text" name="mname" id="mname">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-2 col-form-label">Last name</label>
+                                                        <div class="col-sm-10">
+                                                            <input required class="form-control form-control-sm required edtxt" disabled type="text" name="lname" id="lname">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-2 col-form-label">Birth</label>
+                                                        <div class="col-sm-10">
+                                                            <input required class="form-control form-control-sm required edtxt" disabled type="date" name="birth" id="birth">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-2 col-form-label">Course</label>
+                                                        <div class="col-sm-10">
+                                                            <input class="form-control form-control-sm" type="text" disabled name="course" id="course">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row col-sm-6">
+                                                    <label class="col-sm-2 col-form-label">Year</label>
+                                                    <div class="col-sm-10">
+                                                        <input required class="form-control form-control-sm required edtxt" disabled type="text" id="year" name="year">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row col-sm-6">
+                                                    <label class="col-sm-2 col-form-label">GPA</label>
+                                                    <div class="col-sm-10">
+                                                        <input required class="form-control form-control-sm required edtxt" disabled type="text" id="gpa" name="gpa">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row col-sm-6">
+                                                    <label class="col-sm-2 col-form-label">Email</label>
+                                                    <div class="col-sm-10">
+                                                        <input required class="form-control form-control-sm required edtxt" disabled type="email" id="email" name="email">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row col-sm-6">
+                                                    <label class="col-sm-2 col-form-label">Contact</label>
+                                                    <div class="col-sm-10">
+                                                        <input required class="form-control form-control-sm required edtxt" id="contact" disabled type="text" onkeypress="onlyNumberKey(event)" name="contact" maxlength="11">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label class="col-sm-2 col-form-label">Affiliation</label>
+                                                    <div class="col-sm-12">
+                                                        <textarea class="form-control form-control-sm edtxt" rows="10" disabled id="affiliation" name="affiliation"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12" style="padding-left: 15px">
+                                                    <input type="submit" id="submit" disabled value="Update" name="updateprofile" class="btn btn-primary edtxt left">
+                                                </div>
+                                            </div>
+                                </form>
+                            </div>
+                            <div class="card-footer">
+                                <p>Davao Oriental State Univercity &copy 2022.</p>
+                            </div>
+                        </div>
+                        <div class="card card-primary" id="chairman" hidden>
+                            <div class="card-header">
+                                <div class="card-title row">
+                                    <img id="pro-chair-image" src="dist/img/profile.png" style="height:75px;width:75px" class="mr-3 img-circle elevation-2" alt="User Image">
+                                    <div class="label">
+                                        <h3 id="chair-name"></h3>
+                                        Comelec chairman
+                                    </div>
+                                </div>
+                                <div class="card-tools">
+                                    <nav class="navbar navbar-minimal animate" role="navigation">
+                                        <div class="navbar-toggler animate">
+                                            <span class="menu-icon"></span>
+                                        </div>
+                                        <ul class="navbar-menu animate">
+                                            <li>
+                                                <a href="#" id="tally-btn" class="animate">
+                                                    <span class="desc animate"> See Tally </span>
+                                                    <span><button id="update" style="border:none;background-color: #00000000;color: white"><i class="fas fa-sort-numeric-up-alt"></i></button></span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" id="application" class="animate">
+                                                    <span class="desc animate"> See application </span>
+                                                    <span><button style="border:none;background-color: #00000000;color: white"><i class="fas fa-clipboard-list"></i></button></span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" id="logout-com" class="animate">
+                                                    <span class="desc animate"> Log out </span>
+                                                    <span><button style="border:none;background-color: #00000000;color: white"><i class="fas fa-sign-out-alt"></i></button></span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="card-body row">
+                                <div class="col-md-3 fixed" id="position-panel"></div>
+                                <div class="col-md-9 candidacy" id="candidacy"></div>
+                                <div class="col-md-9 candidacy" hidden id="application-panel"></div>
+                            </div>
+                            <div class="card-footer">
+                                <a>Davao Oriental State Univercity &copy 2022.</a>
+                                <a href="print.php" target="_blank" style="padding: 3px 9px; border: 1px solid gray" class="float-right btn-primary">Print</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade show" id="viewgrade" style="display: block; padding-right: 17px;" aria-modal="true">
+            <div class="modal-dialog modal-xl">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Grade</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <img id="grade-img" class="col-12">
+                </div>
+              </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+          </div>
+        <script src="plugins/jquery/jquery.min.js"></script>
+        <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="plugins/toastr/toastr.min.js"></script>
+        <script src="plugins/chart.js/Chart.min.js"></script>
+        <script src="dist/js/validation.js"></script>
+        <script src="dist/js/swal.min.js"></script>
+    <script>
+        $(function(){
+            
+            $("#viewgrade").hide();
+            $("#application").click(function(){
+                $("#candidacy").attr('hidden', true);
+                $("#application-panel").attr('hidden', false);
+            })
+            
+            function loadpos(id, b, course, type){
+                $(".position").each(function(){
+                    $(this).attr('class','btn btn-modif-w-r position col-md-12');
+                    if(b){
+                        $(this).removeClass('btn-modif-w-r');
+                        b=false;
+                        id=$(this).attr('id');
+                    }
+                })
+                $.ajax({
+                    url: 'db/DBManipulation.php',
+                    type: 'post',
+                    data: {candidate: id, studid: $('#studid').val(),type: type,coursre: course},
+                    success: function(result){
+                        $chunk = result.split('||');
+                        var title = '';
+                        if($chunk[0] == '1'){
+                            title = 'Are you certain you want to vote for this candidate?';
+                        }else{
+                            title = 'Are you sure you want to nominate this person as a candidate?';
+                        }
+                        if(type == 'tally'){
+                            $("#candidacy").html($chunk[1]);
+                            const studname = [], vote = [], colors = [];
+                            var x = 0, y = 0, z = 0;
+                            
+                            $(".studname").each(function(index){
+                                studname.push($(this).val());
+                                vote.push($(".votecount").eq(index).val());
+                                z += 60;
+                                y += 30;
+                                x = 30;
+                                if(z > 240) y += 30;
+                                if(y > 240) x += 10;
+                                var tc = 'rgb('+x+','+y+','+z+')';
+                                colors.push(tc);
+                            })
+
+                            var donutData        = {
+                            labels: studname,
+                            datasets: [
+                                {
+                                data: vote,
+                                backgroundColor : colors,
+                                }
+                            ]
+                            }
+                            var donutOptions     = {
+                                maintainAspectRatio : false,
+                                responsive : true,
+                            }
+                            var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+                            var pieOptions     = {
+                                maintainAspectRatio : false,
+                                responsive : true,
+                            }
+                            var pieChart = new Chart(pieChartCanvas, {
+                                type: 'pie',
+                                data: donutData,
+                                options: pieOptions      
+                            })
+                        }else{
+                            $("#application-panel").html($chunk[1]);
+                            $(".btn-grade").click(function(){
+                                $.ajax({
+                                    url: 'db/DBManipulation.php',
+                                    type: 'post',
+                                    data: {loadImg: $(this).val()},
+                                    success: function(data){
+                                        $("#grade-img").attr('src',data);
+                                    }
+                                })
+                            })
+                            $is = 0;
+                            setInterval(function(){
+                                $(".count-label").each(function(){
+                                    const thislabel = $(this);
+                                    $.ajax({
+                                        url: 'db/latestvote.php',
+                                        type: 'post',
+                                        data: {studid: $(this).attr('id')},
+                                        success: function(result){
+                                            thislabel.html('Count of Vote: '+result);
+                                        }
+                                    })
+                                });
+                            },1000);
+                            $(".btn-approve").click(function(){
+                                var btn = $(this);
+                                Swal.fire({
+                                title: title,
+                                showCancelButton: true,
+                                confirmButtonText: 'Yes',
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        $.ajax({
+                                            url: 'db/DBManipulation.php',
+                                            type: 'post',
+                                            data: {nominate: $(this).attr('id'), studid: $('#studid').val()},
+                                            success: function(result){
+                                                if(result == 'true') {
+                                                    Swal.fire('You are now a candidate for this year election.', '', 'success');
+                                                    btn.attr('class','btn btn-primary col-12').attr('disabled', true).text('APPROVED');
+                                                }else if(result == 'vote'){
+                                                    loadcan(id,b);
+                                                    btn.attr('class','btn btn-primary col-12').attr('disabled', true).text('VOTED');
+                                                }
+                                            }
+                                        })
+                                    } else if (result.isDenied) {
+                                        Swal.fire('Changes are not saved', '', 'info')
+                                    }
+                                })
+                            })
+                        }
+                    }
+                })
+            }
+
+            $("#tally-btn").click(function(){
+                $("#candidacy").attr('hidden', false);
+                $("#application-panel").attr('hidden', true);
+            })
+
+            $("#vote-btn").click(function(){
+                $.ajax({
+                    url: 'db/DBManipulation.php',
+                    type: 'post',
+                    data: {usertype: 'vote'},
+                    success: function(){
+                        window.location = 'applicant.html';
+                    }
+                })
+            })
+
+            $( "form" ).on( "submit", function(e) {
+                $("#studid").attr('disabled',false);
+                var dataString = $(this).serialize();
+                $.ajax({
+                type: "POST",
+                url: "db/DBManipulation.php",
+                data: dataString,
+                success: function (result) {
+                    toastr.success(result);
+                }})
+            })
+
+            $.ajax({
+                url: 'db/DBManipulation.php',
+                type: 'post',
+                data: {auth: true},
+                success: function(result){
+                    $chunk = result.split("||");
+                    if($chunk[0] == 'false' || $chunk[0] == 1) window.location = 'login.html';
+                    $('#studid').val($chunk[1]);
+                    if($chunk[2] != '') {$('#pro-image').attr('src','upload/'+$chunk[2]);$('#pro-chair-image').attr('src','upload/'+$chunk[2]);}
+                    if($chunk[10] == '0'){
+                        $("#chairman").attr('hidden', false);
+                    }
+                    else{$("#student").attr('hidden', false);}
+                    $('#fname').val($chunk[3]);
+                    $('#chair-name').html($chunk[5]+', '+$chunk[3]);
+                    $('#mname').val($chunk[4]);
+                    $('#lname').val($chunk[5]);
+                    $('#birth').val($chunk[6]);
+                    $('#gpa').val($chunk[7]);
+                    $('#affiliation').val($chunk[8]);
+                    $('#year').val($chunk[9]);
+                    $('#course').val($chunk[11]);
+                    $('#email').val($chunk[12]);
+                    $('#contact').val($chunk[13]);
+                    $.ajax({
+                        url: 'db/DBManipulation.php',
+                        type: 'post',
+                        data: {loadposition: true},
+                        success: function(result){
+                            var b = true, id = 0;
+                            $("#position-panel").html(result);
+                            $(".position").click(function(){
+                                loadpos($(this).attr('id'),b, $chunk[14],'tally');
+                                loadpos($(this).attr('id'),b, $chunk[14],'application');
+                                $(this).removeClass('btn-modif-w-r');
+                            })
+                            if(b){
+                                loadpos(id,b, $chunk[14],'tally');
+                                loadpos(id,b, $chunk[14],'application');
+                                b=false;
+                            }
+                        }
+                    })
+                }
+            })
+
+            var b = true;
+            $("#update").click(function(){
+                if(b) b = false;
+                else b = true;
+                $(".edtxt").each(function(){
+                    $(this).attr('disabled', b);
+                })
+                $("#custom-btn").attr('hidden',b);
+
+            })
+
+
+            $("#logout").click(function(){
+                logout();
+            })
+
+            $("#logout-com").click(function(){
+                logout();
+            })
+
+            function logout(){
+                $.ajax({
+                    url: 'db/DBManipulation.php',
+                    type: 'post',
+                    data: {logout: true},
+                    success: function(result){
+                        if(result == 'false') window.location = 'login.html';
+                    }
+                })
+            }
+
+            $('.navbar-toggler').on('click', function(event) {
+                event.preventDefault();
+                $(this).closest('.navbar-minimal').toggleClass('open');
+            })
+        })
+        const custom = document.querySelector("#custom-btn"),
+        defaultbtn = document.querySelector("#default-btn"),
+        img = document.querySelector("#pro-image");
+        custom.addEventListener("click", function(){
+            defaultbtn.click();
+        });
+
+        defaultbtn.addEventListener("change", function(){
+            const file = defaultbtn.files[0];
+            if(file){
+                const reader = new FileReader();
+                reader.onload = function(){
+                    const result = reader.result;
+                    img.src = result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function onlyNumberKey(evt) {
+            var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+            if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+                return false;
+            return true;
+        }
+
+    </script>
+</body>
+</html>

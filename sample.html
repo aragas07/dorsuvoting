@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <title>AdminLTE 3 | Top Navigation</title>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <link rel="shortcut icon" type="image/x-icon" href="dist/img/credit/dorsu.ico">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="dist/css/style.css">
+  <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body class="hold-transition layout-top-nav">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand-md navbar-dark navbar-primary">
+    <div class="container">
+      <a href="index3.html" class="navbar-brand">
+        <img src="dist/img/credit/dorsu.png" alt="DOrSU Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span style="font-family: Arial; font-weight: 500;" class="brand-text font-weight-light">Welcome to DOrSU Voting</span>
+      </a>
+      
+      <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Right navbar links -->
+      <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+        <li class="nav-item"><span class="nav-link"  id="card-title"></span></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link" data-toggle="dropdown" href="#"><i class="fa fa-bars"></i></a>
+          <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right" id="dropdownmenu">
+          </div>
+
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container">
+        <div class="col-sm-12">
+            <h1 class="m-0 text-dark">Institute of Computer and Engineering</h1>
+        </div>
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <div class="content">
+        <div class="container">
+            <div class="container-fluid" id="information">
+              <div class="col-md-12 student" hidden>
+                <form class="needs-validation" id="forms" method="POST" action="db/DBManipulation.php" novalidate enctype="multipart/form-data">
+                  <div class="row">
+                      <div class="col-sm-3" style="min-width: 250px; text-align: center">
+                          <div class="form-group">
+                              <img id="pro-image" src="dist/img/profile.png" class="col-md-12">
+                          </div>
+                          <div class="form-group col">
+                              <button id="custom-btn" hidden class="btn btn-primary col-md-12" type="button">CHOOSE IMAGE</button>
+                          </div>
+                          <input type="file" name="file" accept="image/x-png,image/gif,image/jpeg" hidden id="default-btn">
+                      </div>
+                      <div class="col-sm-9">
+                          <div class="form-group row">
+                              <label class="col-sm-2 col-form-label">ID</label>
+                              <div class="col-sm-10">
+                                  <input required class="form-control form-control-sm" type="text" disabled name="studid" id="studid">
+                              </div>
+                          </div>
+                          <div class="form-group row">
+                              <label class="col-sm-2 col-form-label">First name</label>
+                              <div class="col-sm-10">
+                                  <input required class="form-control form-control-sm required edtxt" disabled type="text" name="fname" id="fname">
+                              </div>
+                          </div>
+                          <div class="form-group row">
+                              <label class="col-sm-2 col-form-label">Middle name</label>
+                              <div class="col-sm-10">
+                                  <input required class="form-control form-control-sm required edtxt" disabled type="text" name="mname" id="mname">
+                              </div>
+                          </div>
+                          <div class="form-group row">
+                              <label class="col-sm-2 col-form-label">Last name</label>
+                              <div class="col-sm-10">
+                                  <input required class="form-control form-control-sm required edtxt" disabled type="text" name="lname" id="lname">
+                              </div>
+                          </div>
+                          <div class="form-group row">
+                              <label class="col-sm-2 col-form-label">Birth</label>
+                              <div class="col-sm-10">
+                                  <input required class="form-control form-control-sm required edtxt" disabled type="date" name="birth" id="birth">
+                              </div>
+                          </div>
+                          <div class="form-group row">
+                              <label class="col-sm-2 col-form-label">Course</label>
+                              <div class="col-sm-10">
+                                  <input class="form-control form-control-sm" type="text" disabled name="course" id="course">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="form-group row col-sm-6">
+                          <label class="col-sm-2 col-form-label">Year</label>
+                          <div class="col-sm-10">
+                              <input required class="form-control form-control-sm required edtxt" disabled type="text" id="year" name="year">
+                          </div>
+                      </div>
+                      <div class="form-group row col-sm-6">
+                          <label class="col-sm-2 col-form-label">GPA</label>
+                          <div class="col-sm-10">
+                              <input required class="form-control form-control-sm required edtxt" disabled type="text" id="gpa" name="gpa">
+                          </div>
+                      </div>
+                      <div class="form-group row col-sm-6">
+                          <label class="col-sm-2 col-form-label">Email</label>
+                          <div class="col-sm-10">
+                              <input required class="form-control form-control-sm required edtxt" disabled type="email" id="email" name="email">
+                          </div>
+                      </div>
+                      <div class="form-group row col-sm-6">
+                          <label class="col-sm-2 col-form-label">Contact</label>
+                          <div class="col-sm-10">
+                              <input required class="form-control form-control-sm required edtxt" id="contact" disabled type="text" onkeypress="onlyNumberKey(event)" name="contact" maxlength="11">
+                          </div>
+                      </div>
+                      <div class="form-group col-md-12">
+                          <label class="col-sm-2 col-form-label">Affiliation</label>
+                          <div class="col-sm-12">
+                              <textarea class="form-control form-control-sm edtxt" rows="10" disabled id="affiliation" name="affiliation"></textarea>
+                          </div>
+                      </div>
+                      <div class="col-md-12" style="padding-left: 15px">
+                          <input type="submit" id="submit" disabled value="Update" name="updateprofile" class="btn btn-primary edtxt left">
+                      </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          <div class="row">
+            <div class="col-md-12 chairman">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="col-12 active-item">
+                                    <a>Supreme Student Government</a>
+                                </div>
+                                <div class="dropdown-divider"></div>
+                                <div class="col-12 text-dark text-center">
+                                    <a>Institute Student Government</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body" id="position-panel">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9 candidacy">
+                        <div id="candidacy">
+                        </div>
+                        <div class="application-panel" id="application-panel" hidden></div>
+                        <a href="print.php" target="_blank" style="padding: 3px 9px; border: 1px solid gray" class="float-right btn-primary">Print</a>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+    <div class="p-3">
+      <h5>Title</h5>
+      <p>Sidebar content</p>
+    </div>
+  </aside>
+  <!-- /.control-sidebar -->
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <!-- To the right -->
+    <!-- Default to the left -->
+    <strong><a>Davao Oriental State Univercity &copy 2022</a>.</strong> All rights reserved.
+  </footer>
+</div>
+<!-- ./wrapper -->
+        <div class="modal fade show" id="viewgrade" style="display: block; padding-right: 17px;" aria-modal="true">
+            <div class="modal-dialog modal-xl">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Grade</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <img id="grade-img" class="col-12">
+                </div>
+              </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+          </div>
+
+<!-- REQUIRED SCRIPTS -->
+
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="plugins/toastr/toastr.min.js"></script>
+<script src="plugins/chart.js/Chart.min.js"></script>
+<script src="dist/js/validation.js"></script>
+<script src="dist/js/swal.min.js"></script>
+<script>
+$(function(){
+    
+    $("#viewgrade").hide();
+    $("#application").click(function(){
+        $("#candidacy").attr('hidden', true);
+        $(".application-panel").each(function(i){
+            $(this).attr('hidden', false);
+        });
+    })
+    
+    function loadpos(id, b, course, type){
+        $(".position").each(function(){
+            $(this).attr('class','btn btn-modif-w-r position col-md-12');
+            if(b){
+                $(this).removeClass('btn-modif-w-r');
+                b=false;
+                id=$(this).attr('id');
+            }
+        })
+        $.ajax({
+            url: 'db/DBManipulation.php',
+            type: 'post',
+            data: {candidate: id, studid: $('#studid').val(),type: type,coursre: course},
+            success: function(result){
+                $chunk = result.split('||');
+                var title = '';
+                if($chunk[0] == '1'){
+                    title = 'Are you certain you want to vote for this candidate?';
+                }else{
+                    title = 'Are you sure you want to nominate this person as a candidate?';
+                }
+                if(type == 'tally'){
+                    $("#candidacy").html($chunk[1]);
+                    const studname = [], vote = [], colors = [];
+                    var x = 0, y = 0, z = 0;
+                    
+                    $(".studname").each(function(index){
+                        studname.push($(this).val());
+                        vote.push($(".votecount").eq(index).val());
+                        z += 60;
+                        y += 30;
+                        x = 30;
+                        if(z > 240) y += 30;
+                        if(y > 240) x += 10;
+                        var tc = 'rgb('+x+','+y+','+z+')';
+                        colors.push(tc);
+                    })
+
+                    var donutData        = {
+                    labels: studname,
+                    datasets: [
+                        {
+                        data: vote,
+                        backgroundColor : colors,
+                        }
+                    ]
+                    }
+                    var donutOptions     = {
+                        maintainAspectRatio : false,
+                        responsive : true,
+                    }
+                    var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+                    var pieOptions     = {
+                        maintainAspectRatio : false,
+                        responsive : true,
+                    }
+                    var pieChart = new Chart(pieChartCanvas, {
+                        type: 'pie',
+                        data: donutData,
+                        options: pieOptions      
+                    })
+                }else{
+                    $("#application-panel").html($chunk[1]);
+                    $(".btn-grade").click(function(){
+                        $.ajax({
+                            url: 'db/DBManipulation.php',
+                            type: 'post',
+                            data: {loadImg: $(this).val()},
+                            success: function(data){
+                                $("#grade-img").attr('src',data);
+                            }
+                        })
+                    })
+                    $is = 0;
+                    setInterval(function(){
+                        $(".count-label").each(function(){
+                            const thislabel = $(this);
+                            $.ajax({
+                                url: 'db/latestvote.php',
+                                type: 'post',
+                                data: {studid: $(this).attr('id')},
+                                success: function(result){
+                                    thislabel.html('Count of Vote: '+result);
+                                }
+                            })
+                        });
+                    },1000);
+                    $(".btn-approve").click(function(){
+                        var btn = $(this);
+                        Swal.fire({
+                        title: title,
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                $.ajax({
+                                    url: 'db/DBManipulation.php',
+                                    type: 'post',
+                                    data: {nominate: $(this).attr('id'), studid: $('#studid').val()},
+                                    success: function(result){
+                                        if(result == 'true') {
+                                            Swal.fire('You are now a candidate for this year election.', '', 'success');
+                                            btn.attr('class','btn btn-primary col-12').attr('disabled', true).text('APPROVED');
+                                        }else if(result == 'vote'){
+                                            loadcan(id,b);
+                                            btn.attr('class','btn btn-primary col-12').attr('disabled', true).text('VOTED');
+                                        }
+                                    }
+                                })
+                            } else if (result.isDenied) {
+                                Swal.fire('Changes are not saved', '', 'info')
+                            }
+                        })
+                    })
+                }
+            }
+        })
+    }
+
+    $("#tally-btn").click(function(){
+        $("#candidacy").attr('hidden', false);
+        $(".application-panel").each(function(i){
+            $(this).attr('hidden', true);
+        });
+    })
+
+    $("#vote-btn").click(function(){
+        $.ajax({
+            url: 'db/DBManipulation.php',
+            type: 'post',
+            data: {usertype: 'vote'},
+            success: function(){
+                window.location = 'applicant.html';
+            }
+        })
+    })
+
+    $( "form" ).on( "submit", function(e) {
+        $("#studid").attr('disabled',false);
+        var dataString = $(this).serialize();
+        $.ajax({
+        type: "POST",
+        url: "db/DBManipulation.php",
+        data: dataString,
+        success: function (result) {
+            toastr.success(result);
+        }})
+    })
+
+    $.ajax({
+        url: 'db/DBManipulation.php',
+        type: 'post',
+        data: {auth: true},
+        success: function(result){
+            $chunk = result.split("||");
+            if($chunk[0] == 'false' || $chunk[0] == 1) window.location = 'login.html';
+            $('#studid').val($chunk[1]);
+            if($chunk[2] != '') {$('#pro-image').attr('src','upload/'+$chunk[2]);$('#pro-chair-image').attr('src','upload/'+$chunk[2]);}
+            if($chunk[10] == '0'){
+                $(".chairman").each(function(i){
+                    $(this).attr('hidden', false);
+                });
+                $("#dropdownmenu").html('<a href="#" id="tally-btn" class="dropdown-item"><i class="fas fa-sort-numeric-up-alt mr-2"></i>See Tally</a>'
+            +'<div class="dropdown-divider"></div>'
+            +'<a href="#" id="application" class="dropdown-item"><i class="fas fa-clipboard-list mr-2"></i>See application</a>'
+            +'<div class="dropdown-divider"></div><a href="#" id="logout" class="dropdown-item"><i class="fas fa-sign-out-alt mr-2"></i> Log out</a>');
+            }
+            else{
+                $(".student").each(function(i){
+                    $(this).attr('hidden', false);
+                });
+                $("#dropdownmenu").html('<a href="faq.html" class="dropdown-item"> <i class="fas fa-question mr-2"></i>FAQ</a>'
+                +'<div class="dropdown-divider"></div>'
+                +'<a href="#" id="update" class="dropdown-item"><i class="fa fa-pen mr-2"></i>Update profile</a>'
+                +'<div class="dropdown-divider"></div>'
+                +'<a href="#" id="vote-btn" class="dropdown-item"><i class="fa fa-vote-yea mr-2"></i>Vote</a>'
+                +'<div class="dropdown-divider"></div>'
+                +'<a href="#" id="logout" class="dropdown-item"><i class="fas fa-sign-out-alt mr-2"></i> Log out</a>');
+            }
+            $('#fname').val($chunk[3]);
+            $('#chair-name').html($chunk[5]+', '+$chunk[3]);
+            $('#mname').val($chunk[4]);
+            $('#lname').val($chunk[5]);
+            $('#birth').val($chunk[6]);
+            $('#gpa').val($chunk[7]);
+            $('#affiliation').val($chunk[8]);
+            $('#year').val($chunk[9]);
+            $('#course').val($chunk[11]);
+            $('#email').val($chunk[12]);
+            $('#contact').val($chunk[13]);
+            $.ajax({
+                url: 'db/DBManipulation.php',
+                type: 'post',
+                data: {loadposition: true},
+                success: function(result){
+                    var b = true, id = 0;
+                    $("#position-panel").html(result);
+                    $(".position").click(function(){
+                        loadpos($(this).attr('id'),b, $chunk[14],'tally');
+                        loadpos($(this).attr('id'),b, $chunk[14],'application');
+                        $(this).removeClass('btn-modif-w-r');
+                    })
+                    if(b){
+                        loadpos(id,b, $chunk[14],'tally');
+                        loadpos(id,b, $chunk[14],'application');
+                        b=false;
+                    }
+                }
+            })
+        }
+    })
+
+    var b = true;
+    $("#update").click(function(){
+        if(b) b = false;
+        else b = true;
+        $(".edtxt").each(function(){
+            $(this).attr('disabled', b);
+        })
+        $("#custom-btn").attr('hidden',b);
+
+    })
+
+
+    $("#logout").click(function(){
+        logout();
+    })
+
+    $("#logout-com").click(function(){
+        logout();
+    })
+
+    function logout(){
+        $.ajax({
+            url: 'db/DBManipulation.php',
+            type: 'post',
+            data: {logout: true},
+            success: function(result){
+                if(result == 'false') window.location = 'login.html';
+            }
+        })
+    }
+
+    $('.navbar-toggler').on('click', function(event) {
+        event.preventDefault();
+        $(this).closest('.navbar-minimal').toggleClass('open');
+    })
+})
+const custom = document.querySelector("#custom-btn"),
+defaultbtn = document.querySelector("#default-btn"),
+img = document.querySelector("#pro-image");
+custom.addEventListener("click", function(){
+    defaultbtn.click();
+});
+
+defaultbtn.addEventListener("change", function(){
+    const file = defaultbtn.files[0];
+    if(file){
+        const reader = new FileReader();
+        reader.onload = function(){
+            const result = reader.result;
+            img.src = result;
+        }
+        reader.readAsDataURL(file);
+    }
+});
+
+function onlyNumberKey(evt) {
+    var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+    if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+        return false;
+    return true;
+}
+
+</script>
+</body>
+</html>

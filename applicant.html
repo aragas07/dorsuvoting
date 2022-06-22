@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <title>DOrSU Voting</title>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <link rel="shortcut icon" type="image/x-icon" href="dist/img/credit/dorsu.ico">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="dist/css/alt/style.css">
+  <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body class="hold-transition layout-top-nav">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand-md navbar-dark navbar-primary">
+    <div class="container">
+      <a href="index3.html" class="navbar-brand">
+        <img src="dist/img/credit/dorsu.png" alt="DOrSU Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span style="font-family: Arial; font-weight: 500;" class="brand-text font-weight-light">Welcome to DOrSU Voting</span>
+      </a>
+      
+      <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Right navbar links -->
+      <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+        <li class="nav-item"><span class="nav-link"  id="card-title"></span></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link" data-toggle="dropdown" href="#"><i class="fa fa-bars"></i></a>
+          <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+            <a href="faq.html" class="dropdown-item"> <i class="fas fa-question mr-2"></i>FAQ</a>
+            <div class="dropdown-divider"></div>
+            <a href="#" id="vote-btn" class="dropdown-item active"><i class="fa fa-vote-yea mr-2"></i>Vote</a>
+            <div class="dropdown-divider"></div>
+            <a href="#" id="logout" class="dropdown-item"><i class="fas fa-sign-out-alt mr-2"></i> Log out</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!-- /.navbar -->
+
+  <div class="content-wrapper" hidden id="vote">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container">
+        <div class="row mb-2">
+            <div class="col-sm-12">
+                <h1 id="page-title">Supreme Student Government Election SY 2022-2023</h1>
+            </div>
+
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <div class="content">
+      <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="#" value="Supreme Student Government Election SY 2022-2023" class="default active-item" id="0">Supreme Student Government</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="default institute-class" value="Institute Student Government Election SY 2022-2023" id="1">Institute Student Government</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body" id="position">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9 candidacy">
+                <div class="card">
+                    <div class="card-body" id="candidacy">
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.content -->
+  </div>
+
+  <div class="m-5 text-center" hidden id="closed-vote">
+    <h1>The online voting is currently closed.</h1>
+  </div>
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+    <div class="p-3">
+      <h5>Title</h5>
+      <p>Sidebar content</p>
+    </div>
+  </aside>
+  <!-- /.control-sidebar -->
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <!-- To the right -->
+    <!-- Default to the left -->
+    <strong><a>Davao Oriental State Univercity &copy 2022</a>.</strong> All rights reserved.
+  </footer>
+</div>
+<!-- ./wrapper -->
+                <div class="modal fade" id="adding">
+                    <div class="modal-dialog modal-m">
+                        <div class="modal-content" hidden id="modal-apply">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Apply</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" hidden id="applying">
+                                <form class="needs-validation" method="post" novalidate id="apply">
+                                    <input type="text" hidden name="studid" id="studid">
+                                    <div class="form-group">
+                                        <label class="col-sm-12">where do you submit your application as a candidate?</label>
+                                        <div class="col-sm-12">
+                                            <select name="candidate_type" class="custom-select">
+                                                <option value="0">Supreme Student Government</option>
+                                                <option value="1">Institute Student Government</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12">Position</label>
+                                        <div class="col-sm-12">
+                                            <select name="position" id="posselect" class="custom-select"></select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12">Upload report of grade scanned</label>
+                                        <div class="col-sm-12">
+                                            <input type="file" required name="filegrade" class="form-control-file" accept="image/*">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12">Upload COR</label>
+                                        <div class="col-sm-12">
+                                            <input type="file" required name="filecor" class="form-control-file" accept="image/*">
+                                        </div>
+                                    </div>
+                                    <input class="btn btn-primary col-12" name="apply" type="submit" value="Submit">
+                                </form>
+                            </div>
+                            <div class="modal-body" hidden id="applyed">
+                                <h3 id="title"></h3>
+                            </div>
+                        </div>
+                        <div hidden class="modal-content" id="closed-apply">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Apply</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <h3>This year's election's online registration is currently closed.</h3>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                
+                <div class="modal fade" id="viewgrade">
+                    <div class="modal-dialog">
+                        <div class="modal-content" style="padding: 0;">
+                            <img id="grade-img">
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+
+<!-- REQUIRED SCRIPTS -->
+
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="plugins/toastr/toastr.min.js"></script>
+<script src="dist/js/swal.min.js"></script>
+<script>
+$(function(){
+    var forms = document.querySelectorAll('.needs-validation');
+    Array.prototype.slice.call(forms)
+        .forEach(function(form) {form.addEventListener('submit', function(event) {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated')
+        }, false)
+    })
+    
+    $.ajax({
+        url: '../db/DBManipulation.php',
+        type: 'post',
+        data: {isApply: true},
+        success: function(result){
+            if(result){
+                $("#modal-apply").attr('hidden', false);
+            }else{
+                $("#closed-apply").attr("hidden",false);
+            }
+        }
+    })
+    
+    $('.navbar-toggler').on('click', function(event) {
+        event.preventDefault();
+        $(this).closest('.navbar-minimal').toggleClass('open');
+    })
+
+    loadAll(0);
+    $.ajax({
+        url: '../db/DBManipulation.php',
+        type: 'post',
+        data: {isVote: true},
+        success: function(result){
+            console.log(result);
+            if(result){
+                $("#vote").attr('hidden',false);
+            }else{
+                $("#closed-vote").attr('hidden', false);
+            }
+        }
+    })
+
+    var count = 0;
+
+    function loadAll(cantype){
+        $.ajax({
+            url: 'db/DBManipulation.php',
+            type: 'post',
+            data: {auth: true},
+            success: function(result){
+                $chunk = result.split("||");
+                $('#studid').val($chunk[1]);
+                $("#card-title").html($chunk[5]+", "+$chunk[3]);
+                $(".institute-class").attr('value',$chunk[15]+" Election SY 2021-2022");
+                var iid = $chunk[16];
+                if($chunk[17] == 1){
+                    alert($chunk[18]);
+                }
+                if($chunk[0] == 'false' && count == 0) window.location = 'login.html';
+                else if($chunk[0] == 'student' && count == 0){
+                    $("#logout").before('<a href="#" data-toggle="modal" id="modal" data-target="#adding" class="dropdown-item"><i class="fas fa-user-tie mr-2"></i>Apply for position</a><div class="dropdown-divider"></div>');
+                    $("#modal").click(function(){
+                        isApplyed();
+                    })
+                }else if($chunk[0] == 'candidate' && count == 0) $("#logout").before('<a href="index.html" class="dropdown-item"> <i class="fas fa-id-card mr-2"></i>View profile</a><div class="dropdown-divider"></div>');
+                if($chunk[10] == '0'){
+                    $.ajax({
+                        url: 'db/DBManipulation.php',
+                        type: 'post',
+                        data: {getType: true},
+                        success: function(result){
+                            if(result == 'tally'){$("#title-panel").text("Tally Panel");}
+                            else{$("#title-panel").text("Comelec Panel");}
+                        }
+                    })
+                }
+                count++;
+                $.ajax({
+                    url: 'db/DBManipulation.php',
+                    type: 'post',
+                    data: {loadposition: $("#studid").val(), electype: cantype},
+                    success: function(result){
+                        var b = true, id = 0;
+                        $("#position").html(result);
+                        $(".position").click(function(){
+                            loadpos($(this).attr('id'),b,cantype,iid);
+                            $(this).removeClass('btn-modif-w-r');
+                        })
+                        if(b){
+                            loadpos(id,b,cantype,iid);
+                            b=false;
+                        }
+                    }
+                })
+            }
+        })
+    }
+
+    $(".default").each(function(i){
+        $(this).click(function(){
+            $(".default").each(function(num){
+                $(this).attr('class','default');
+            })
+            $(this).attr('class','default active-item');
+            $("#page-title").text($(this).attr('value'));
+            loadAll($(this).attr('id'));
+        })
+    })
+
+    $("#logout").click(function(){
+        $.ajax({
+            url: 'db/DBManipulation.php',
+            type: 'post',
+            data: {logout: true},
+            success: function(result){
+                if(result == 'false') window.location = 'login.html';
+            }
+        })
+    })
+
+    function loadpos(id, b, cantype, iid){
+        $(".position").each(function(){
+            $(this).attr('class','btn btn-modif-w-r position col-md-12');
+            if(b){
+                $(this).removeClass('btn-modif-w-r');
+                b=false;
+                id=$(this).attr('id');
+            }
+        })
+        loadcan(id,b,cantype,iid);
+    }
+
+    function loadcan(id,b,cantype,iid){
+        $.ajax({
+            url: 'db/DBManipulation.php',
+            type: 'post',
+            data: {candidate: id, studid: $('#studid').val(), type: 'student',candidate_type: cantype,iid: iid},
+            success: function(result){
+                $chunk = result.split('||');
+                var title = '';
+                $("#candidacy").html($chunk[1]);
+                if($chunk[0] == '1'){
+                    title = 'Are you certain you want to vote for this candidate?';
+                }else{
+                    title = 'Are you sure you want to nominate this person as a candidate?';
+                }
+                $(".btn-grade").click(function(){
+                    $("#grade-img").attr('src','gradefile/'+$(this).attr('id'));
+                })
+
+                $(".btn-success").click(function(){
+                    var btn = $(this);
+                    Swal.fire({
+                    title: title,
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: 'db/DBManipulation.php',
+                                type: 'post',
+                                data: {nominate: $(this).attr('id'), studid: $('#studid').val()},
+                                success: function(result){
+                                    if(result == 'true') {
+                                        Swal.fire('You are now a candidate for this year election.', '', 'success');
+                                        btn.attr('class','btn btn-primary col-12').attr('disabled', true).text('APPROVED');
+                                    }else if(result == 'vote'){
+                                        loadcan(id,b,cantype,iid);
+                                        btn.attr('class','btn btn-primary col-12').attr('disabled', true).text('VOTED');
+                                    }
+                                }
+                            })
+                        } else if (result.isDenied) {
+                            Swal.fire('Changes are not saved', '', 'info')
+                        }
+                    })
+                })
+            }
+        })
+    }
+
+    
+    $("#apply").on('submit',function(event){
+        event.preventDefault();
+        Swal.fire({
+        title: 'Are you certain you want to campaign?',
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: 'db/DBManipulation.php',
+                    method: 'POST',
+                    data: new FormData(this),
+                    contentType:false,
+                    cache: false,
+                    processData: false,
+                    success: function(result){
+                        if(result.trim() == 'success'){
+                            swal.fire('Just wait for the admin to confirm that you are a candidate.','', 'success');
+                            $("#chfile").val("");
+                            $("#adding").modal("hide");
+                        }else{
+                            swal.fire('Im sorry for not being able to submit your application','', 'error');
+                        }
+                    }
+                })
+            } else if (result.isDenied) {
+                Swal.fire('Changes are not saved', '', 'info')
+            }
+        })
+    })
+    function isApplyed(){
+        $.ajax({
+            url: 'db/DBManipulation.php',
+            type: 'post',
+            data: {loadposforselect: $("#studid").val()},
+            success: function(result){
+                $chunk = result.split('||');
+                if($chunk[0] == '0'){
+                    $("#applying").attr('hidden', true);
+                    $("#applyed").attr('hidden', false);
+                    $("#title").text("You're submitting an application for the position of "+$chunk[1]+".");
+                }else{
+                    $("#applying").attr('hidden', false);
+                    $("#applyed").attr('hidden', true);
+                    $("#posselect").html($chunk[1]);
+                }
+            }
+        })
+    }
+
+    var b = true;
+    $("#update").click(function(){
+        if(b) b = false;
+        else b = true;
+        $(".edtxt").each(function(){
+            $(this).attr('disabled', b);
+        })
+    })
+        
+})
+</script>
+</body>
+</html>

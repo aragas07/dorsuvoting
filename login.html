@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>DOrSU | Log in</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" type="image/x-icon" href="dist/img/credit/dorsu.ico">
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="dist/css/login.css">
+  <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
+</head>
+<body>
+<div class="login-box">
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="login-logo">
+    </div>
+    <div class="card-body login-card-body">
+      <h1 class="login-box-msg">DOrSU Voting</h1>
+      <form class="needs-validation" id="forms" novalidate>
+        <div class="input-group mb-3">
+          <input type="text" id="username" class="form-control" placeholder="2015-0000" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" id="password" class="form-control" placeholder="YYYY/MM/DD" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <input type="text" hidden required>
+        <div class="row">
+          <div class="col-4">
+            <button type="submit" id="submit" class="btn btn-primary btn-block">Sign In</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+    </div>
+    <!-- /.login-card-body -->
+  </div>
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="dist/js/adminlte.min.js"></script>
+<script src="plugins/toastr/toastr.min.js"></script>
+
+<script>
+  $(function(){
+    $.ajax({
+      url: 'db/DBManipulation.php',
+      type: 'post',
+      data: {auth: true},
+      success: function(result){
+        $chunk = result.split("||");
+        if($chunk[0] == 'student') window.location = 'index.html';
+        else if($chunk[0] == 'admin') window.location = 'superadmin/';
+        else if($chunk[0] == 'candidate') window.location = 'applicant.html';
+
+      }
+    })
+
+    $("#submit").click(function(){
+      var b = true;
+      $(".form-control").each(function(){
+        $(this).val($(this).val().trim());
+        if($(this).val().length == 0){
+          b = false;
+        }
+      })
+      if(b){
+        $.ajax({
+          url: 'db/DBManipulation.php',
+          type: 'post',
+          data: {login: $("#username").val(), password: $("#password").val()},
+          success: function(result){
+            if(result == 'student') window.location = 'applicant.html';
+            else if(result == 'admin') window.location = 'superadmin/#';
+            else if(result == 'candidate' || result == 'chairman') window.location = 'index.html';
+            else toastr.error(result+" Check your id or password");
+          }
+        })
+      }
+    })
+
+  })
+</script>
+
+<script src="dist/js/validation.js"></script>
+</body>
+</html>
