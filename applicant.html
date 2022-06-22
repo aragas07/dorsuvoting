@@ -234,6 +234,7 @@ $(function(){
         type: 'post',
         data: {isVote: true},
         success: function(result){
+            alert(result)
             console.log(result);
             if(result){
                 $("#vote").attr('hidden',false);
