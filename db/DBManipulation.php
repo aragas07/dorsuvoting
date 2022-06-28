@@ -1,5 +1,6 @@
 <?php
     include('DBConnection.php');
+    error_reporting(0);
     global $conn;
     session_start();
     if(isset($_POST['login'])){
