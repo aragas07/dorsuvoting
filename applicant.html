@@ -132,7 +132,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <div class="form-group">
                                         <label class="col-sm-12">where do you submit your application as a candidate?</label>
                                         <div class="col-sm-12">
-                                            <select name="candidate_type" class="custom-select">
+                                            <select name="candidate_type" id="can-type" class="custom-select">
                                                 <option value="0">Supreme Student Government</option>
                                                 <option value="1">Institute Student Government</option>
                                             </select>
@@ -234,7 +234,6 @@ $(function(){
         type: 'post',
         data: {isVote: true},
         success: function(result){
-            console.log(result);
             if(result){
                 $("#vote").attr('hidden',false);
             }else{
@@ -284,6 +283,7 @@ $(function(){
                     data: {loadposition: $("#studid").val(), electype: cantype},
                     success: function(result){
                         var b = true, id = 0;
+                        console.log(result);
                         $("#position").html(result);
                         $(".position").click(function(){
                             loadpos($(this).attr('id'),b,cantype,iid);
@@ -298,6 +298,18 @@ $(function(){
             }
         })
     }
+    $("#can-type").change(function(){
+        $.ajax({
+            url: 'db/DBManipulation.php',
+            type: 'post',
+            data: {loadposforselect: $("#studid").val(), type: $(this).val()},
+            success: function(result){
+                $chunk = result.split('||');
+                console.log(result);
+                $("#posselect").html($chunk[1]);
+            }
+        })
+    })
 
     $(".default").each(function(i){
         $(this).click(function(){
@@ -417,7 +429,7 @@ $(function(){
         $.ajax({
             url: 'db/DBManipulation.php',
             type: 'post',
-            data: {loadposforselect: $("#studid").val()},
+            data: {loadposforselect: $("#studid").val(), type: $("#can-type").val()},
             success: function(result){
                 $chunk = result.split('||');
                 if($chunk[0] == '0'){

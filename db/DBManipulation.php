@@ -74,19 +74,20 @@
         $_SESSION['admin'] = false;
         echo 'false';
     }else if(isset($_POST['loadposition'])){
-        $getPosition = $conn->query("SELECT * FROM position");
         $sid = $_POST['loadposition'];
         $type = $_POST['electype'];
+        $getPosition = $conn->query("SELECT * FROM position WHERE type = $type");
         while($row = $getPosition->fetch_assoc()){
             $position = $row['id'];
             $getVote = $conn->query("SELECT * FROM vote INNER JOIN candidate INNER JOIN student ON student.id = candidate.student_id AND vote.candidate_id = candidate.student_id WHERE vote.student_id = '$sid' AND position_id = $position AND type = $type");
-            echo '<button class="btn btn-modif-w-r position col-md-12" id='.$row['id'].'>'.$row['position_name'];
+            echo '<button class="btn btn-modif-w-r position col-md-12" id='.$position.'>'.$row['position_name'];
             while($voted = $getVote->fetch_assoc()){
                 echo '<div class="col-12 text-center mb-2" style="border-top: 1px solid gray">'.$voted['fname'].' '.ucfirst(substr($voted['mname'],0,1)).'. '.$voted['lname'].'</div>';
             }
             echo '</button>';
         }
     }else if(isset($_POST['loadposforselect'])){
+        $type = $_POST['type'];
         $candidate = $conn->query("SELECT * FROM candidate INNER JOIN position ON candidate.position_id = position.id WHERE student_id = '".$_POST['loadposforselect']."'");
         if($candidate->num_rows){
             while($row = $candidate->fetch_assoc()){
@@ -94,7 +95,7 @@
             }
         }else{
             echo '1||';
-            $getPosition = $conn->query("SELECT * FROM position");
+            $getPosition = $conn->query("SELECT * FROM position WHERE type = $type");
             while($row = $getPosition->fetch_assoc()){
                 echo '<option value="'.$row['id'].'">'.$row['position_name'].'</option>';
             }
@@ -139,21 +140,21 @@
         $iid = $_POST['iid'];
         if($_POST['type'] == 'tally' && $candidate_type == 0){
             $getVoted = $conn->query("SELECT *,count(*) AS number,s.id AS sid FROM vote AS v INNER JOIN candidate AS c INNER JOIN student AS s INNER JOIN course AS co 
-            ON c.student_id = s.id AND co.id = s.course_id AND v.candidate_id = c.student_id WHERE position_id = $position AND c.approved = 1 AND type = 0 GROUP BY s.id");
+            ON c.student_id = s.id AND co.id = s.course_id AND v.candidate_id = c.student_id WHERE position_id = $position AND c.approved = 1 AND c.type = 0 GROUP BY s.id");
         }else if($_POST['type'] == 'tally' && $candidate_type == 1){
             $getVoted = $conn->query("SELECT *,count(*) AS number,s.id AS sid FROM vote AS v INNER JOIN candidate AS c INNER JOIN student AS s INNER JOIN course AS co 
             INNER JOIN institute AS i ON c.student_id = s.id AND co.id = s.course_id AND v.candidate_id = c.student_id AND co.institute_id = i.id
-            WHERE position_id = $position AND c.approved = 1 AND type = 1 AND i.id = $iid GROUP BY s.id");
+            WHERE position_id = $position AND c.approved = 1 AND c.type = 1 AND i.id = $iid GROUP BY s.id");
         }else{
             if($_POST['type'] == 'application'){
                 $_SESSION['status'] = 'application';
             }else{$_SESSION['status'] = '';}
             if($candidate_type == 0){
                 $getVoted = $conn->query("SELECT *,s.id AS sid FROM course AS co INNER JOIN student AS s INNER JOIN vote AS v INNER JOIN candidate AS c INNER JOIN position AS p 
-                ON co.id = s.course_id AND s.id = v.candidate_id AND v.candidate_id = c.student_id AND p.id = c.position_id WHERE v.student_id = '$studid' AND position_id = $position AND c.approved = $status AND type = 0");
+                ON co.id = s.course_id AND s.id = v.candidate_id AND v.candidate_id = c.student_id AND p.id = c.position_id WHERE v.student_id = '$studid' AND position_id = $position AND c.approved = $status AND c.type = 0");
             }else{
                 $getVoted = $conn->query("SELECT *,s.id AS sid FROM institute AS i INNER JOIN course AS co INNER JOIN student AS s INNER JOIN vote AS v INNER JOIN candidate AS c INNER JOIN position AS p 
-                ON co.id = s.course_id AND s.id = v.candidate_id AND v.candidate_id = c.student_id AND p.id = c.position_id AND i.id = co.institute_id WHERE v.student_id = '$studid' AND position_id = $position AND c.approved = $status AND type = 1 AND i.id = $iid");
+                ON co.id = s.course_id AND s.id = v.candidate_id AND v.candidate_id = c.student_id AND p.id = c.position_id AND i.id = co.institute_id WHERE v.student_id = '$studid' AND position_id = $position AND c.approved = $status AND c.type = 1 AND i.id = $iid");
             }
         }
         if($getVoted->num_rows > 0){
@@ -161,10 +162,10 @@
         }else{
             $votenum = false;
             if($candidate_type == 0){
-                $getVoted = $conn->query("SELECT *,s.id AS sid FROM course AS co INNER JOIN student AS s INNER JOIN candidate AS c INNER JOIN position AS p ON co.id = s.course_id AND s.id = c.student_id AND c.position_id = p.id WHERE p.id = $position AND c.approved = $status AND type = 0");
+                $getVoted = $conn->query("SELECT *,s.id AS sid FROM course AS co INNER JOIN student AS s INNER JOIN candidate AS c INNER JOIN position AS p ON co.id = s.course_id AND s.id = c.student_id AND c.position_id = p.id WHERE p.id = $position AND c.approved = $status AND c.type = 0");
             }else{
                 $getVoted = $conn->query("SELECT *,s.id AS sid FROM institute AS i INNER JOIN course AS co INNER JOIN student AS s INNER JOIN candidate AS c INNER JOIN position AS p 
-                ON co.id = s.course_id AND s.id = c.student_id AND c.position_id = p.id AND i.id = co.institute_id WHERE p.id = $position AND c.approved = $status  AND type = 1 AND i.id = $iid");
+                ON co.id = s.course_id AND s.id = c.student_id AND c.position_id = p.id AND i.id = co.institute_id WHERE p.id = $position AND c.approved = $status  AND c.type = 1 AND i.id = $iid");
             }
         }
 
@@ -388,11 +389,14 @@
         $vote_start = $_POST['start_vote'];
         $vote_end = $_POST['end_vote'];
         $sy = $_POST['sy'];
-        if(mysqli_query($conn,"INSERT INTO open_elect(application_open,application_close,vote_start,vote_end,sy) VALUES('$app_open','$app_close','$vote_start','$vote_end','$sy')")){
-            echo true;
-        }else{
-            echo false;
-        }
+        if($app_open < $app_close && $app_close < $vote_start && $vote_start < $vote_end){
+            mysqli_query($conn,"TRUNCATE open_elect");
+            if(mysqli_query($conn,"INSERT INTO open_elect(application_open,application_close,vote_start,vote_end,sy) VALUES('$app_open','$app_close','$vote_start','$vote_end','$sy')")){
+                echo true;
+            }else{
+                echo false;
+            }
+        }else{ echo false;}
     }else if(isset($_POST['isVote'])){
         $isVote = $conn->query("SELECT * FROM open_elect where vote_start < now() and vote_end > now()");
         if($isVote->num_rows != 0){

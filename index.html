@@ -306,6 +306,7 @@ $(function(){
             data: {candidate: id, studid: $('#studid').val(),type: type,coursre: course, candidate_type: cantype, iid: iid},
             success: function(result){
                 $chunk = result.split('||');
+                console.log($chunk[0]);
                 var title = '';
                 if($chunk[0] == '1'){
                     title = 'Are you certain you want to vote for this candidate?';
@@ -525,9 +526,10 @@ $(function(){
                 $.ajax({
                     url: 'db/DBManipulation.php',
                     type: 'post',
-                    data: {loadposition: true},
+                    data: {loadposition: true, electype: cantype},
                     success: function(result){
                         var b = true, id = 0;
+                        console.log(result);
                         $("#position-panel").html(result);
                         var iid = $chunk[16]
                         $(".position").click(function(){

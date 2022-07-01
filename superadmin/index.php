@@ -118,6 +118,7 @@
                     cache: false,
                     processData: false,
                     success: function(result){
+                        console.log(result);
                         if(result){
                             Swal.fire('This year election was successful in craeting.','','success');
                             loadElectTable();

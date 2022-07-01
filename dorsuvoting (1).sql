@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 21, 2022 at 05:29 PM
+-- Generation Time: Jul 01, 2022 at 05:28 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -68,7 +68,8 @@ INSERT INTO `candidate` (`position_id`, `student_id`, `approved`, `grades`, `cor
 (2, '2020-0003', 1, 'consent-1.jpg', 'Sample Wireframe.png', 1, NULL),
 (2, '2020-0005', 1, 'PXL_20211103_010350429.PORTRAIT.jpg', 'Sample Wireframe.png', 1, NULL),
 (1, '2020-0008', 1, 'new_logo.png', 'JOE01972.JPG', 0, NULL),
-(1, '2020-0010', 1, 'new_logo.png', '273026640_748957496086201_5658389762292723469_n.jpg', 1, NULL);
+(1, '2020-0010', 1, 'new_logo.png', '273026640_748957496086201_5658389762292723469_n.jpg', 1, NULL),
+(8, '2020-0011', 0, 'PXL_20211103_010350429.PORTRAIT.jpg', 'Sample Wireframe.png', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -148,8 +149,7 @@ CREATE TABLE `open_elect` (
 --
 
 INSERT INTO `open_elect` (`id`, `application_open`, `application_close`, `vote_start`, `vote_end`, `sy`) VALUES
-(1, '2020-06-01', '2020-06-03', '2020-06-13', '2020-06-24', '2020-2023'),
-(2, '2021-06-01', '2021-06-05', '2021-06-16', '2021-07-05', '2021-2023');
+(1, '2022-06-26', '2022-06-29', '2022-06-30', '2022-07-13', '2022-2023');
 
 -- --------------------------------------------------------
 
@@ -159,21 +159,29 @@ INSERT INTO `open_elect` (`id`, `application_open`, `application_close`, `vote_s
 
 CREATE TABLE `position` (
   `id` int(11) NOT NULL,
-  `position_name` varchar(45) DEFAULT NULL
+  `position_name` varchar(45) DEFAULT NULL,
+  `type` tinyint(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `position`
 --
 
-INSERT INTO `position` (`id`, `position_name`) VALUES
-(1, 'Governor'),
-(2, 'Vice Governor'),
-(3, 'Secretary'),
-(4, 'Treasurer'),
-(5, 'Auditor'),
-(6, 'P.I.O'),
-(7, 'Sgt.at Arms');
+INSERT INTO `position` (`id`, `position_name`, `type`) VALUES
+(1, 'Governor', 1),
+(2, 'Vice Governor', 1),
+(3, 'Secretary', 1),
+(4, 'Treasurer', 1),
+(5, 'Auditor', 1),
+(6, 'P.I.O', 1),
+(7, 'Sgt.at Arms', 1),
+(8, 'President', 0),
+(9, 'Vice President', 0),
+(10, 'Secretary', 0),
+(11, 'Treasurer', 0),
+(12, 'Auditor', 0),
+(13, 'P.I.O', 0),
+(14, 'Sgt.at Arms', 0);
 
 -- --------------------------------------------------------
 
@@ -226,27 +234,6 @@ CREATE TABLE `vote` (
   `student_id` varchar(10) NOT NULL,
   `candidate_id` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `vote`
---
-
-INSERT INTO `vote` (`student_id`, `candidate_id`) VALUES
-('2020-0011', '2020-0011'),
-('2020-0008', '2020-0003'),
-('2020-0004', '2020-0008'),
-('2020-0006', '2020-0004'),
-('2020-0012', '2020-0006'),
-('2020-0015', '2020-0004'),
-('2020-0005', '2020-0008'),
-('2020-0005', '2020-0010'),
-('2020-0002', '2020-0002'),
-('2020-0002', '2020-0008'),
-('2020-0010', '2020-0002'),
-('2020-0010', '2020-0005'),
-('2020-0005', '2020-0005'),
-('2020-0012', '2020-0008'),
-('2020-0007', '2020-0003');
 
 --
 -- Indexes for dumped tables
@@ -331,13 +318,13 @@ ALTER TABLE `institute`
 -- AUTO_INCREMENT for table `open_elect`
 --
 ALTER TABLE `open_elect`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `position`
 --
 ALTER TABLE `position`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
